@@ -4,8 +4,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace EntityFrameworkCoffeeShop.CoffeeShopMenu
-{
+namespace EntityFrameworkCoffeeShop.CoffeeShopMenu;
+
     public enum MenuOptionsEnum
     {
         AddProduct = 1,
@@ -15,4 +15,3 @@ namespace EntityFrameworkCoffeeShop.CoffeeShopMenu
         ShowAllProducts,
         Exit
     }
-}

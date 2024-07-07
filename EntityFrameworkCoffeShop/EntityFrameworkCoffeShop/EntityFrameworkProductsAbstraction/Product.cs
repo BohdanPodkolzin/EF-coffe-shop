@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace EntityFrameworkCoffeeShop
+namespace EntityFrameworkCoffeeShop.EntityFrameworkProductsAbstraction
 {
-    internal class ProductController
+    internal class Product
     {
     }
 }
