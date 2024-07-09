@@ -9,6 +9,19 @@ namespace EntityFrameworkCoffeeShop.EntityFrameworkProductsAbstraction
 {
     public class ProductService
     {
+        public static void AddProductService(string name)
+            => ProductController.AddProduct(name);
+
+        public static void RemoveProductService()
+            => ProductController.RemoveProduct(GetProductOptionInput());
+
+        public static void UpdateProductService(string name) 
+            => ProductController.UpdateProduct(GetProductOptionInput(), name);
+
+        public static void DeleteProductService()
+            => ProductController.RemoveProduct(GetProductOptionInput());
+
+
         public static Product GetProductOptionInput()
         {
             var products = ProductController.GetAllProducts();

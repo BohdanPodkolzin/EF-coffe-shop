@@ -9,19 +9,15 @@ public class ProductController
         dataBase.SaveChanges();
     }
 
-    public static void RemoveProduct()
+    public static void RemoveProduct(Product product)
     {
-        var product = ProductService.GetProductOptionInput();
-
         using var dataBase = new ProductsContext();
         dataBase.Remove(product);
         dataBase.SaveChanges();
     }
 
-    public static void UpdateProduct(string name)
+    public static void UpdateProduct(Product product, string name)
     {
-        var product = ProductService.GetProductOptionInput();
-        
         using var dataBase = new ProductsContext();
         product.Name = name;
         dataBase.Update(product);

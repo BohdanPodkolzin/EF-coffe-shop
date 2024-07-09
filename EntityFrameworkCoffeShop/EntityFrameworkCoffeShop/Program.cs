@@ -33,19 +33,19 @@ public class Program
                 case MenuOptionsEnum.AddProduct:
                 {
                     var name = AnsiConsole.Ask<string>("Specify the product`s name to add it: ");
-                    ProductController.AddProduct(name);
+                    ProductService.AddProductService(name);
                     Console.Clear();
                     break;
                 }
                 case MenuOptionsEnum.RemoveProduct:
                 {
-                    ProductController.RemoveProduct();
+                    ProductService.RemoveProductService();
                     break;
                 }
                 case MenuOptionsEnum.UpdateProduct:
                 {
                     var name = AnsiConsole.Ask<string>("Specify the new product`s name: ");
-                    ProductController.UpdateProduct(name);
+                    ProductService.UpdateProductService(name);
                     Console.Clear();
                     break;
                 }
