@@ -18,7 +18,7 @@ public class Program
         {
             var option = AnsiConsole.Prompt(
                 new SelectionPrompt<MenuOptionsEnum>()
-                    .Title("Choose the command (1-6")
+                    .Title("Choose the command (1-6)")
                     .AddChoices(
                         MenuOptionsEnum.AddProduct,
                         MenuOptionsEnum.RemoveProduct,

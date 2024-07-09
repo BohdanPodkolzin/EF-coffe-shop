@@ -1,12 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace EntityFrameworkCoffeeShop.Properties
 {
-    class launchSettingsTemplate
-    {
+  "profiles": {
+    "EntityFrameworkCoffeShop": {
+      "commandName": "Project",
+      "workingDirectory": "PATH_TO_DIRECTORY"
     }
+  }
 }
