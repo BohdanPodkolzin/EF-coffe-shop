@@ -15,34 +15,34 @@ public class ProductController
         using var dataBase = new ProductsContext();
         dataBase.Add(new Product { Name = name });
         dataBase.SaveChanges();
-
     }
 
     public static void RemoveProduct()
     {
-        var name = AnsiConsole.Ask<string>("Specify the product`s name to remove it: ");
-        var id = AnsiConsole.Ask<int>("Specify the product`s name to remove it: ");
+        var product = ProductService.GetProductOptionInput();
+
         using var dataBase = new ProductsContext();
-        dataBase.Remove(new Product { Id = id, Name = name });
+        dataBase.Remove(product);
         dataBase.SaveChanges();
     }
 
     public static void UpdateProduct()
     {
-        var id = AnsiConsole.Ask<int>("Specify productId to update: ");
-        var name = AnsiConsole.Ask<string>("Specify product to update: ");
+        var product = ProductService.GetProductOptionInput();
+        
         using var dataBase = new ProductsContext();
-        dataBase.Update(new Product { Id = id, Name = name });
+        var name = AnsiConsole.Ask<string>("Specify the new product`s name: ");
+        product.Name = name;
+        dataBase.Update(product);
         dataBase.SaveChanges();
     }
 
     public static void ShowProduct()
-    {
-        throw new NotImplementedException();
-    }
+        => UserInterface.ShowProductDetails(ProductService.GetProductOptionInput());
 
-    public static void ShowAllProducts()
-    {
-        throw new NotImplementedException();
-    }
+    public static void ShowAllProducts() 
+        => UserInterface.ShowProductsTable(GetAllProducts());
+
+    public static List<Product> GetAllProducts() 
+        => new ProductsContext().Products.ToList();
 }

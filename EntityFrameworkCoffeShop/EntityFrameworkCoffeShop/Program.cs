@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Linq.Expressions;
+using EntityFrameworkCoffeeShop;
 using EntityFrameworkCoffeeShop.CoffeeShopMenu;
 using EntityFrameworkCoffeeShop.EntityFrameworkProductsAbstraction;
 using Spectre.Console;
