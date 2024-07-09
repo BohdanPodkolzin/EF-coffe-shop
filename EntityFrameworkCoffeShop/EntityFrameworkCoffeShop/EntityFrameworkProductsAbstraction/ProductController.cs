@@ -23,13 +23,4 @@ public class ProductController
         dataBase.Update(product);
         dataBase.SaveChanges();
     }
-
-    public static void ShowProduct()
-        => UserInterface.ShowProductDetails(ProductService.GetProductOptionInput());
-
-    public static void ShowAllProducts() 
-        => UserInterface.ShowProductsTable(GetAllProducts());
-
-    public static List<Product> GetAllProducts() 
-        => new ProductsContext().Products.ToList();
 }

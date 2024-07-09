@@ -32,9 +32,7 @@ public class Program
             {
                 case MenuOptionsEnum.AddProduct:
                 {
-                    var name = AnsiConsole.Ask<string>("Specify the product`s name to add it: ");
-                    ProductService.AddProductService(name);
-                    Console.Clear();
+                    ProductService.AddProductService();
                     break;
                 }
                 case MenuOptionsEnum.RemoveProduct:
@@ -44,30 +42,23 @@ public class Program
                 }
                 case MenuOptionsEnum.UpdateProduct:
                 {
-                    var name = AnsiConsole.Ask<string>("Specify the new product`s name: ");
-                    ProductService.UpdateProductService(name);
-                    Console.Clear();
+                    ProductService.UpdateProductService();
                     break;
                 }
                 case MenuOptionsEnum.ShowProduct:
                 {
-                    ProductController.ShowProduct();
+                    ProductService.ShowProduct();
                     break;
                 }
                 case MenuOptionsEnum.ShowAllProducts:
                 {
-                    ProductController.ShowAllProducts();
+                    ProductService.ShowAllProducts();
                     break;
                 }
                 case MenuOptionsEnum.Exit:
                 {
                     Console.WriteLine("Exiting the app...");
                     Environment.Exit(0);
-                    break;
-                }
-                default:
-                {
-                    Console.WriteLine("Invalid choice !");
                     break;
                 }
             }
