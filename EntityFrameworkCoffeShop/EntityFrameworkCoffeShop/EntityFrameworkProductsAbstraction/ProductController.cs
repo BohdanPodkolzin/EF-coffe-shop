@@ -1,17 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Spectre.Console;
-
-namespace EntityFrameworkCoffeeShop.EntityFrameworkProductsAbstraction;
+﻿namespace EntityFrameworkCoffeeShop.EntityFrameworkProductsAbstraction;
 
 public class ProductController
 {
-    public static void AddProduct()
+    public static void AddProduct(string name)
     {
-        var name = AnsiConsole.Ask<string>("Specify the product`s name to add it: ");
         using var dataBase = new ProductsContext();
         dataBase.Add(new Product { Name = name });
         dataBase.SaveChanges();
@@ -26,12 +18,11 @@ public class ProductController
         dataBase.SaveChanges();
     }
 
-    public static void UpdateProduct()
+    public static void UpdateProduct(string name)
     {
         var product = ProductService.GetProductOptionInput();
         
         using var dataBase = new ProductsContext();
-        var name = AnsiConsole.Ask<string>("Specify the new product`s name: ");
         product.Name = name;
         dataBase.Update(product);
         dataBase.SaveChanges();

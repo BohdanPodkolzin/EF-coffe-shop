@@ -31,27 +31,45 @@ public class Program
             switch (option)
             {
                 case MenuOptionsEnum.AddProduct:
-                    ProductController.AddProduct();
+                {
+                    var name = AnsiConsole.Ask<string>("Specify the product`s name to add it: ");
+                    ProductController.AddProduct(name);
+                    Console.Clear();
                     break;
+                }
                 case MenuOptionsEnum.RemoveProduct:
+                {
                     ProductController.RemoveProduct();
                     break;
+                }
                 case MenuOptionsEnum.UpdateProduct:
-                    ProductController.UpdateProduct();
+                {
+                    var name = AnsiConsole.Ask<string>("Specify the new product`s name: ");
+                    ProductController.UpdateProduct(name);
+                    Console.Clear();
                     break;
+                }
                 case MenuOptionsEnum.ShowProduct:
+                {
                     ProductController.ShowProduct();
                     break;
+                }
                 case MenuOptionsEnum.ShowAllProducts:
+                {
                     ProductController.ShowAllProducts();
                     break;
+                }
                 case MenuOptionsEnum.Exit:
+                {
                     Console.WriteLine("Exiting the app...");
                     Environment.Exit(0);
                     break;
+                }
                 default:
+                {
                     Console.WriteLine("Invalid choice !");
                     break;
+                }
             }
         }
     }
