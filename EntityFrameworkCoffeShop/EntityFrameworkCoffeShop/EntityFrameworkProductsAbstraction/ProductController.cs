@@ -2,10 +2,10 @@
 
 public class ProductController
 {
-    public static void AddProduct(string name)
+    public static void AddProduct(Product product)
     {
         using var dataBase = new ProductsContext();
-        dataBase.Add(new Product { Name = name });
+        dataBase.Add(product);
         dataBase.SaveChanges();
     }
 
@@ -16,10 +16,9 @@ public class ProductController
         dataBase.SaveChanges();
     }
 
-    public static void UpdateProduct(Product product, string name)
+    public static void UpdateProduct(Product product)
     {
         using var dataBase = new ProductsContext();
-        product.Name = name;
         dataBase.Update(product);
         dataBase.SaveChanges();
     }

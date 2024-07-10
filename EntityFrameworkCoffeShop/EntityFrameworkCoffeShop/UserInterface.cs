@@ -10,11 +10,16 @@ namespace EntityFrameworkCoffeeShop
             var table = new Table();
             table.AddColumn("Id");
             table.AddColumn("Name");
+            table.AddColumn("Price");
 
             foreach (var product in products)
             {
                 if (product.Name == null) return;
-                table.AddRow(product.Id.ToString(), product.Name);
+                table.AddRow(
+                    product.Id.ToString(),
+                    product.Name,
+                    product.Price.ToString()
+                    );
             }
 
             AnsiConsole.Write(table);
@@ -29,6 +34,7 @@ namespace EntityFrameworkCoffeeShop
             var panel = new Panel($"""
                                    Id: {product.Id} 
                                    Name: {product.Name}
+                                   Price: {product.Price}
                                    """)
             {
                 Header = new PanelHeader("Product details"),
