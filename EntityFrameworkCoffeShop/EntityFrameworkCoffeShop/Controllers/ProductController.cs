@@ -1,4 +1,6 @@
-﻿namespace EntityFrameworkCoffeeShop.EntityFrameworkProductsAbstraction;
+﻿using EntityFrameworkCoffeeShop.Models;
+
+namespace EntityFrameworkCoffeeShop.Controllers;
 
 public class ProductController
 {
