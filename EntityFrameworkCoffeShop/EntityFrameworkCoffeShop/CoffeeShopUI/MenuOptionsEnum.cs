@@ -10,6 +10,7 @@ public enum MenuOptionsEnum
 {
     AddProduct = 1,
     AddCategory,
+    ShowAllCategories,
     RemoveProduct,
     UpdateProduct,
     ShowProduct,

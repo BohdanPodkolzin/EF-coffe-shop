@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using EntityFrameworkCoffeeShop.CoffeeShopMenu;
 using EntityFrameworkCoffeeShop.Controllers;
 using EntityFrameworkCoffeeShop.Models;
 using Spectre.Console;
@@ -20,5 +21,8 @@ namespace EntityFrameworkCoffeeShop.Services
 
             CategoryController.AddCategory(category);
         }
+
+        public static void ShowAllCategories()
+            => UserInterface.ShowCategoriesTable(CategoryController.GetCategories());
     }
 }

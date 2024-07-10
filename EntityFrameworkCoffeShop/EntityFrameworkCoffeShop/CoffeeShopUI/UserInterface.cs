@@ -19,6 +19,7 @@ public static class UserInterface
                     .AddChoices(
                         MenuOptionsEnum.AddProduct,
                         MenuOptionsEnum.AddCategory,
+                        MenuOptionsEnum.ShowAllCategories,
                         MenuOptionsEnum.RemoveProduct,
                         MenuOptionsEnum.UpdateProduct,
                         MenuOptionsEnum.ShowProduct,
@@ -35,6 +36,11 @@ public static class UserInterface
                 case MenuOptionsEnum.AddCategory:
                     {
                         CategoryService.AddCategoryService();
+                        break;
+                    }
+                case MenuOptionsEnum.ShowAllCategories:
+                    {
+                        CategoryService.ShowAllCategories();
                         break;
                     }
                 case MenuOptionsEnum.RemoveProduct:
@@ -104,6 +110,27 @@ public static class UserInterface
         };
 
         AnsiConsole.Write(panel);
+
+        Console.WriteLine("Enter any key to continue");
+        Console.ReadLine();
+        Console.Clear();
+    }
+
+    public static void ShowCategoriesTable(List<Category> categories)
+    {
+        var table = new Table();
+        table.AddColumn("Id");
+        table.AddColumn("Name");
+
+        foreach (var category in categories)
+        {
+            table.AddRow(
+                category.CategoryId.ToString(),
+                category.Name
+            );
+        }
+
+        AnsiConsole.Write(table);
 
         Console.WriteLine("Enter any key to continue");
         Console.ReadLine();

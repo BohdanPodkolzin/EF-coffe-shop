@@ -12,10 +12,6 @@ namespace EntityFrameworkCoffeeShop.Controllers
         }
 
         public static List<Category> GetCategories()
-        {
-            using var dataBase = new ProductsContext();
-            var categories = dataBase.Categories.ToList();
-            return categories;
-        }
+            => new ProductsContext().Categories.ToList();
     }
 }
