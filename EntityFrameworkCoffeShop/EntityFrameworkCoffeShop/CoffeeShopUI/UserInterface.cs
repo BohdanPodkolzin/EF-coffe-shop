@@ -1,4 +1,5 @@
-﻿using EntityFrameworkCoffeeShop.Models;
+﻿using System.Globalization;
+using EntityFrameworkCoffeeShop.Models;
 using EntityFrameworkCoffeeShop.Services;
 using Spectre.Console;
 
@@ -13,6 +14,7 @@ public static class UserInterface
 
         while (appRunning)
         {
+            Console.Clear();
             var option = AnsiConsole.Prompt(
                 new SelectionPrompt<MenuOptionsEnum>()
                     .Title("Choose the command (1-6)")
@@ -79,14 +81,16 @@ public static class UserInterface
         table.AddColumn("Id");
         table.AddColumn("Name");
         table.AddColumn("Price");
+        table.AddColumn("Category");
 
         foreach (var product in products)
         {
-            if (product.Name == null) return;
+            
             table.AddRow(
                 product.ProductId.ToString(),
                 product.Name,
-                product.Price.ToString()
+                product.Price.ToString(CultureInfo.CurrentCulture),
+                product.Category!.Name
                 );
         }
 
@@ -94,7 +98,6 @@ public static class UserInterface
 
         Console.WriteLine("Enter any key to continue");
         Console.ReadLine();
-        Console.Clear();
     }
 
     public static void ShowProductDetails(Product product)
@@ -103,6 +106,7 @@ public static class UserInterface
                                 Id: {product.ProductId} 
                                 Name: {product.Name}
                                 Price: {product.Price}
+                                Category: {product.Category!.Name}
                                 """)
         {
             Header = new PanelHeader("Product details"),
@@ -113,7 +117,6 @@ public static class UserInterface
 
         Console.WriteLine("Enter any key to continue");
         Console.ReadLine();
-        Console.Clear();
     }
 
     public static void ShowCategoriesTable(List<Category> categories)
@@ -134,7 +137,6 @@ public static class UserInterface
 
         Console.WriteLine("Enter any key to continue");
         Console.ReadLine();
-        Console.Clear();
     }
 }
 

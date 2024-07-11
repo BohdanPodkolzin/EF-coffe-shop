@@ -1,6 +1,7 @@
 ﻿using EntityFrameworkCoffeeShop.CoffeeShopMenu;
 using EntityFrameworkCoffeeShop.Controllers;
 using EntityFrameworkCoffeeShop.Models;
+using Microsoft.EntityFrameworkCore;
 using Spectre.Console;
 
 namespace EntityFrameworkCoffeeShop.Services;
@@ -12,7 +13,8 @@ public class ProductService
         var product = new Product()
         {
             Name = AnsiConsole.Ask<string>("Specify the product`s name: "),
-            Price = AnsiConsole.Ask<decimal>("Specify the product`s price: ")
+            Price = AnsiConsole.Ask<decimal>("Specify the product`s price: "),
+            CategoryId = CategoryService.GetCategoriesOptionInput()
         };
         ProductController.AddProduct(product);
         Console.Clear();
@@ -44,10 +46,10 @@ public class ProductService
         => UserInterface.ShowProductsTable(GetAllProducts());
 
     public static Product GetProductById(int id)
-        => new ProductsContext().Products.SingleOrDefault(x => x.ProductId == id)!;
+        => new ProductsContext().Products.Include(x => x.Category).SingleOrDefault(x => x.ProductId == id)!;
 
     private static List<Product> GetAllProducts()
-        => new ProductsContext().Products.ToList();
+        => new ProductsContext().Products.Include(x => x.Category).ToList();
 
     private static Product GetProductOptionInput()
     {

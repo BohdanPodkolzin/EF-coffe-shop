@@ -10,8 +10,5 @@ namespace EntityFrameworkCoffeeShop.Controllers
             dataBase.Add(category);
             dataBase.SaveChanges();
         }
-
-        public static List<Category> GetCategories()
-            => new ProductsContext().Categories.ToList();
     }
 }
