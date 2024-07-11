@@ -29,6 +29,7 @@ public static class UserInterface
                         MenuOptionsEnum.ShowAllCategories,
                         MenuOptionsEnum.UpdateCategory,
                         MenuOptionsEnum.RemoveCategory,
+                        MenuOptionsEnum.ShowCategoryProducts,
                         MenuOptionsEnum.Exit));
 
             switch (option)
@@ -76,6 +77,11 @@ public static class UserInterface
                 case MenuOptionsEnum.RemoveCategory:
                     {
                         CategoryService.RemoveCategoryService();
+                        break;
+                    }
+                case MenuOptionsEnum.ShowCategoryProducts:
+                    {
+                        CategoryService.ShowCategoryProductsService();
                         break;
                     }
                 case MenuOptionsEnum.Exit:
@@ -150,6 +156,23 @@ public static class UserInterface
 
         Console.WriteLine("Enter any key to continue");
         Console.ReadLine();
+    }
+
+    public static void ShowCategoryProducts(Category category)
+    {
+        var panel = new Panel($"""
+                                Id: {category.CategoryId} 
+                                Name: {category.Name}
+                                Product count: {category.Products?.Count}
+                                """)
+        {
+            Header = new PanelHeader($"{category.Name}"),
+            Padding = new Padding(2, 2, 2, 2),
+        };
+
+        AnsiConsole.Write(panel);
+
+        ShowProductsTable(category.Products!);
     }
 }
 

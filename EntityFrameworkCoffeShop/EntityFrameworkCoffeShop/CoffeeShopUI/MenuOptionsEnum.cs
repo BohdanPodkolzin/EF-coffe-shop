@@ -11,5 +11,6 @@ public enum MenuOptionsEnum
     AddCategory,
     RemoveCategory,
     UpdateCategory,
+    ShowCategoryProducts,
     Exit
 }

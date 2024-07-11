@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using EntityFrameworkCoffeeShop.CoffeeShopMenu;
 using EntityFrameworkCoffeeShop.Controllers;
 using EntityFrameworkCoffeeShop.Models;
+using Microsoft.EntityFrameworkCore;
 using Spectre.Console;
 
 namespace EntityFrameworkCoffeeShop.Services
@@ -36,10 +37,13 @@ namespace EntityFrameworkCoffeeShop.Services
         
 
         public static List<Category> GetAllCategories()
-            => new ProductsContext().Categories.ToList();
+            => new ProductsContext().Categories.Include(x => x.Products).ToList();
         
         public static void ShowAllCategories()
             => UserInterface.ShowCategoriesTable(GetAllCategories());
+
+        public static void ShowCategoryProductsService() 
+            => UserInterface.ShowCategoryProducts(GetCategoriesOptionInput());
 
         public static Category GetCategoriesOptionInput()
         {
