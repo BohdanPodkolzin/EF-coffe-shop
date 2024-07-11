@@ -14,7 +14,7 @@ public class ProductService
         {
             Name = AnsiConsole.Ask<string>("Specify the product`s name: "),
             Price = AnsiConsole.Ask<decimal>("Specify the product`s price: "),
-            CategoryId = CategoryService.GetCategoriesOptionInput()
+            CategoryId = CategoryService.GetCategoriesOptionInput().CategoryId
         };
         ProductController.AddProduct(product);
         Console.Clear();
@@ -31,12 +31,15 @@ public class ProductService
             ? AnsiConsole.Ask<string>("Specify the new product`s name: ")
             : product.Name;
 
-        product.Price = AnsiConsole.Confirm("Update price:")
+        product.Price = AnsiConsole.Confirm("Update price?")
             ? AnsiConsole.Ask<decimal>("Specify the new product`s price: ")
             : product.Price;
 
+        product.Category = AnsiConsole.Confirm("Update category?")
+            ? CategoryService.GetCategoriesOptionInput()
+            : product.Category;
+
         ProductController.UpdateProduct(product);
-        Console.Clear();
     }
 
     public static void ShowProduct()

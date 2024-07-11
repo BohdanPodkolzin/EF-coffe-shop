@@ -1,4 +1,5 @@
 ﻿using System.Globalization;
+using EntityFrameworkCoffeeShop.CoffeeShopUI;
 using EntityFrameworkCoffeeShop.Models;
 using EntityFrameworkCoffeeShop.Services;
 using Spectre.Console;
@@ -20,12 +21,14 @@ public static class UserInterface
                     .Title("Choose the command (1-6)")
                     .AddChoices(
                         MenuOptionsEnum.AddProduct,
-                        MenuOptionsEnum.AddCategory,
-                        MenuOptionsEnum.ShowAllCategories,
-                        MenuOptionsEnum.RemoveProduct,
-                        MenuOptionsEnum.UpdateProduct,
                         MenuOptionsEnum.ShowProduct,
                         MenuOptionsEnum.ShowAllProducts,
+                        MenuOptionsEnum.UpdateProduct,
+                        MenuOptionsEnum.RemoveProduct,
+                        MenuOptionsEnum.AddCategory,
+                        MenuOptionsEnum.ShowAllCategories,
+                        MenuOptionsEnum.UpdateCategory,
+                        MenuOptionsEnum.RemoveCategory,
                         MenuOptionsEnum.Exit));
 
             switch (option)
@@ -33,16 +36,6 @@ public static class UserInterface
                 case MenuOptionsEnum.AddProduct:
                     {
                         ProductService.AddProductService();
-                        break;
-                    }
-                case MenuOptionsEnum.AddCategory:
-                    {
-                        CategoryService.AddCategoryService();
-                        break;
-                    }
-                case MenuOptionsEnum.ShowAllCategories:
-                    {
-                        CategoryService.ShowAllCategories();
                         break;
                     }
                 case MenuOptionsEnum.RemoveProduct:
@@ -63,6 +56,26 @@ public static class UserInterface
                 case MenuOptionsEnum.ShowAllProducts:
                     {
                         ProductService.ShowAllProducts();
+                        break;
+                    }
+                case MenuOptionsEnum.ShowAllCategories:
+                    {
+                        CategoryService.ShowAllCategories();
+                        break;
+                    }
+                case MenuOptionsEnum.AddCategory:
+                    {
+                        CategoryService.AddCategoryService();
+                        break;
+                    }
+                case MenuOptionsEnum.UpdateCategory:
+                    {
+                        CategoryService.UpdateCategoryService();
+                        break;
+                    }
+                case MenuOptionsEnum.RemoveCategory:
+                    {
+                        CategoryService.RemoveCategoryService();
                         break;
                     }
                 case MenuOptionsEnum.Exit:

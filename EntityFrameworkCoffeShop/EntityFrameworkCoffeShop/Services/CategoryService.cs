@@ -23,15 +23,25 @@ namespace EntityFrameworkCoffeeShop.Services
             CategoryController.AddCategory(category);
         }
 
+        public static void UpdateCategoryService()
+        {
+            var category = GetCategoriesOptionInput();
+            category.Name = AnsiConsole.Ask<string>("Enter the new category name: ");
+
+            CategoryController.UpdateCategory(category);
+        }
+
+        public static void RemoveCategoryService()
+            => CategoryController.RemoveCategory(GetCategoriesOptionInput());
+        
+
         public static List<Category> GetAllCategories()
             => new ProductsContext().Categories.ToList();
         
         public static void ShowAllCategories()
             => UserInterface.ShowCategoriesTable(GetAllCategories());
 
-
-
-        public static int GetCategoriesOptionInput()
+        public static Category GetCategoriesOptionInput()
         {
             var categories = GetAllCategories();
             var categoriesNameArray = categories.Select(x => x.Name).ToArray();
@@ -41,9 +51,8 @@ namespace EntityFrameworkCoffeeShop.Services
                 .AddChoices(categoriesNameArray));
 
 
-            var id = categories.Single(x => x.Name == option).CategoryId;
-
-            return id;
+            var category = categories.Single(x => x.Name == option);
+            return category;
         }
     }
 }
