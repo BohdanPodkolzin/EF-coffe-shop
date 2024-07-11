@@ -1,16 +1,28 @@
 ﻿namespace EntityFrameworkCoffeeShop.CoffeeShopUI; 
 
-public enum MenuOptionsEnum
+public enum MainMenuOptionsEnum
 {
-    AddProduct = 1,
-    ShowAllCategories,
+    ManageCategories = 500,
+    ManageProducts,
+    Quit
+}
+
+public enum ProductOptionsEnum
+{
+    AddProduct = 600,
     RemoveProduct,
     UpdateProduct,
     ShowProduct,
     ShowAllProducts,
-    AddCategory,
+    GoBack
+}
+
+public enum CategoryOptionsEnum
+{
+    AddCategory = 1,
     RemoveCategory,
     UpdateCategory,
+    ShowAllCategories,
     ShowCategoryProducts,
-    Exit
+    GoBack
 }

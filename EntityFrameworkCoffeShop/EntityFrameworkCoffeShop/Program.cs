@@ -1,5 +1,4 @@
-﻿using EntityFrameworkCoffeeShop.CoffeeShopMenu;
-
+﻿using EntityFrameworkCoffeeShop.CoffeeShopUI;
 
 namespace EntityFrameworkCoffeShop;
 

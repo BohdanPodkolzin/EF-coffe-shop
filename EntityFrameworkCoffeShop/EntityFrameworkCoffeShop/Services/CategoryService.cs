@@ -4,7 +4,7 @@ using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using EntityFrameworkCoffeeShop.CoffeeShopMenu;
+using EntityFrameworkCoffeeShop.CoffeeShopUI;
 using EntityFrameworkCoffeeShop.Controllers;
 using EntityFrameworkCoffeeShop.Models;
 using Microsoft.EntityFrameworkCore;

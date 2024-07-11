@@ -1,10 +1,9 @@
 ﻿using System.Globalization;
-using EntityFrameworkCoffeeShop.CoffeeShopUI;
 using EntityFrameworkCoffeeShop.Models;
 using EntityFrameworkCoffeeShop.Services;
 using Spectre.Console;
 
-namespace EntityFrameworkCoffeeShop.CoffeeShopMenu;
+namespace EntityFrameworkCoffeeShop.CoffeeShopUI;
 
 public static class UserInterface
 {
@@ -15,81 +14,141 @@ public static class UserInterface
 
         while (appRunning)
         {
-            Console.Clear();
             var option = AnsiConsole.Prompt(
-                new SelectionPrompt<MenuOptionsEnum>()
+                new SelectionPrompt<MainMenuOptionsEnum>()
                     .Title("Choose the command (1-6)")
                     .AddChoices(
-                        MenuOptionsEnum.AddProduct,
-                        MenuOptionsEnum.ShowProduct,
-                        MenuOptionsEnum.ShowAllProducts,
-                        MenuOptionsEnum.UpdateProduct,
-                        MenuOptionsEnum.RemoveProduct,
-                        MenuOptionsEnum.AddCategory,
-                        MenuOptionsEnum.ShowAllCategories,
-                        MenuOptionsEnum.UpdateCategory,
-                        MenuOptionsEnum.RemoveCategory,
-                        MenuOptionsEnum.ShowCategoryProducts,
-                        MenuOptionsEnum.Exit));
+                        MainMenuOptionsEnum.ManageCategories,
+                        MainMenuOptionsEnum.ManageProducts,
+                        MainMenuOptionsEnum.Quit
+                    ));
 
             switch (option)
             {
-                case MenuOptionsEnum.AddProduct:
+                case MainMenuOptionsEnum.ManageCategories:
                     {
-                        ProductService.AddProductService();
+                        CategoriesMenu();
                         break;
                     }
-                case MenuOptionsEnum.RemoveProduct:
+                case MainMenuOptionsEnum.ManageProducts:
                     {
-                        ProductService.RemoveProductService();
+                        ProductsMenu();
                         break;
                     }
-                case MenuOptionsEnum.UpdateProduct:
-                    {
-                        ProductService.UpdateProductService();
-                        break;
-                    }
-                case MenuOptionsEnum.ShowProduct:
-                    {
-                        ProductService.ShowProduct();
-                        break;
-                    }
-                case MenuOptionsEnum.ShowAllProducts:
-                    {
-                        ProductService.ShowAllProducts();
-                        break;
-                    }
-                case MenuOptionsEnum.ShowAllCategories:
-                    {
-                        CategoryService.ShowAllCategories();
-                        break;
-                    }
-                case MenuOptionsEnum.AddCategory:
-                    {
-                        CategoryService.AddCategoryService();
-                        break;
-                    }
-                case MenuOptionsEnum.UpdateCategory:
-                    {
-                        CategoryService.UpdateCategoryService();
-                        break;
-                    }
-                case MenuOptionsEnum.RemoveCategory:
-                    {
-                        CategoryService.RemoveCategoryService();
-                        break;
-                    }
-                case MenuOptionsEnum.ShowCategoryProducts:
-                    {
-                        CategoryService.ShowCategoryProductsService();
-                        break;
-                    }
-                case MenuOptionsEnum.Exit:
+                case MainMenuOptionsEnum.Quit:
                     {
                         Console.WriteLine("Exiting the app...");
                         Environment.Exit(0);
                         break;
                     }
+            }
+        }
+    }
+
+    private static void CategoriesMenu()
+    {
+        var isCategoriesMenuRunning = true;
+        while (isCategoriesMenuRunning)
+        {
+            Console.Clear();
+            var option = AnsiConsole.Prompt(
+                new SelectionPrompt<CategoryOptionsEnum>()
+                    .Title("Categories Menu")
+                    .AddChoices(
+                        CategoryOptionsEnum.AddCategory,
+                        CategoryOptionsEnum.RemoveCategory,
+                        CategoryOptionsEnum.UpdateCategory,
+                        CategoryOptionsEnum.ShowAllCategories,
+                        CategoryOptionsEnum.ShowCategoryProducts,
+                        CategoryOptionsEnum.GoBack
+                    ));
+
+            switch (option)
+            {
+                case CategoryOptionsEnum.AddCategory:
+                    {
+                        CategoryService.AddCategoryService();
+                        break;
+                    }
+                case CategoryOptionsEnum.RemoveCategory:
+                    {
+                        CategoryService.RemoveCategoryService();
+                        break;
+                    }
+                case CategoryOptionsEnum.UpdateCategory:
+                    {
+                        CategoryService.UpdateCategoryService();
+                        break;
+                    }
+                case CategoryOptionsEnum.ShowAllCategories:
+                    {
+                        CategoryService.ShowAllCategories();
+                        break;
+                    }
+                case CategoryOptionsEnum.ShowCategoryProducts:
+                    {
+                        CategoryService.ShowCategoryProductsService();
+                        break;
+                    }
+                case CategoryOptionsEnum.GoBack:
+                    {
+                        isCategoriesMenuRunning = false;
+                        break;
+                    }
+            }
+        }
+    }
+
+    private static void ProductsMenu()
+    {
+        var isProductsMenuRunning = true;
+        while (isProductsMenuRunning)
+        {
+            Console.Clear();
+            var option = AnsiConsole.Prompt(
+                new SelectionPrompt<CategoryOptionsEnum>()
+                    .Title("Categories Menu")
+                    .AddChoices(
+                        CategoryOptionsEnum.AddCategory,
+                        CategoryOptionsEnum.RemoveCategory,
+                        CategoryOptionsEnum.UpdateCategory,
+                        CategoryOptionsEnum.ShowAllCategories,
+                        CategoryOptionsEnum.ShowCategoryProducts,
+                        CategoryOptionsEnum.GoBack
+                    ));
+
+            switch (option)
+            {
+                case CategoryOptionsEnum.AddCategory:
+                {
+                    CategoryService.AddCategoryService();
+                    break;
+                }
+                case CategoryOptionsEnum.RemoveCategory:
+                {
+                    CategoryService.RemoveCategoryService();
+                    break;
+                }
+                case CategoryOptionsEnum.UpdateCategory:
+                {
+                    CategoryService.UpdateCategoryService();
+                    break;
+                }
+                case CategoryOptionsEnum.ShowAllCategories:
+                {
+                    CategoryService.ShowAllCategories();
+                    break;
+                }
+                case CategoryOptionsEnum.ShowCategoryProducts:
+                {
+                    CategoryService.ShowCategoryProductsService();
+                    break;
+                }
+                case CategoryOptionsEnum.GoBack:
+                {
+                    isProductsMenuRunning = false;
+                    break;
+                }
             }
         }
     }
@@ -171,7 +230,6 @@ public static class UserInterface
         };
 
         AnsiConsole.Write(panel);
-
         ShowProductsTable(category.Products!);
     }
 }
