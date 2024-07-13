@@ -60,7 +60,7 @@ public class ProductService
         var productsNameArray = products.Select(x => x.Name).ToArray();
 
         var option = AnsiConsole.Prompt(new SelectionPrompt<string>()
-            .Title("Choose product")!
+            .Title("Choose product:")!
             .AddChoices(productsNameArray));
 
 

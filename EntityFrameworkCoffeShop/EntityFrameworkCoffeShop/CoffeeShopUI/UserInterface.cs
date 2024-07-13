@@ -176,7 +176,7 @@ public static class UserInterface
             {
                 case OrderOptionsEnum.AddOrder:
                 {
-                    OrderService.AddOrder();
+                    OrderService.AddOrderService();
                     break;
                 }
                 case OrderOptionsEnum.GoBack:

@@ -3,17 +3,16 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using EntityFrameworkCoffeeShop.Controllers;
 using EntityFrameworkCoffeeShop.Models;
 using Spectre.Console;
 
 namespace EntityFrameworkCoffeeShop.Services;
 public class OrderService
 {
-    public static void AddOrder()
-    {
-        var products = GetProductsFromOrder();
-    }
-
+    public static void AddOrderService() 
+        => OrderController.AddOrder(GetProductsFromOrder());
+    
     private static List<OrderProduct> GetProductsFromOrder()
     {
         var products = new List<OrderProduct>();
@@ -26,7 +25,7 @@ public class OrderService
         while (!isOrderFinished)
         {
             var product = ProductService.GetProductOptionInput();
-            var quantity = AnsiConsole.Ask<int>("How many?");
+            var quantity = AnsiConsole.Ask<int>("How many: ");
 
             order.TotalPrice += product.Price * quantity;
 
@@ -39,6 +38,7 @@ public class OrderService
 
                 });
 
+            Console.WriteLine($"You`ve picked {product.Name} in the amount of {quantity}. Total price: {order.TotalPrice}");
             isOrderFinished = !AnsiConsole.Confirm("Would you like add one more product?");
         }
 
