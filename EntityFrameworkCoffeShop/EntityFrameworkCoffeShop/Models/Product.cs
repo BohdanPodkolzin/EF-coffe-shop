@@ -20,4 +20,6 @@ public class Product
 
     [ForeignKey(nameof(CategoryId))]
     public Category? Category { get; set; }
+
+    public ICollection<OrderProduct>? OrderProducts { get; set; }
 }

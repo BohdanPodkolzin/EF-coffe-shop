@@ -1,12 +1,16 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.ComponentModel.DataAnnotations;
 
-namespace EntityFrameworkCoffeeShop.Models
+
+namespace EntityFrameworkCoffeeShop.Models;
+
+public class Order
 {
-    internal class Order
-    {
-    }
+
+    [Key]
+    public int OrderId { get; set; }
+    public decimal TotalPrice { get; set; }
+    public DateTime CreatedDate { get; set; }
+    public DateTime UpdatedDate { get; set; }
+    public ICollection<OrderProduct>? OrderProducts { get; set; }
 }
+

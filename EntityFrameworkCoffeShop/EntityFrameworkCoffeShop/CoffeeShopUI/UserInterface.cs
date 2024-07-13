@@ -36,11 +36,10 @@ public static class UserInterface
                         break;
                     }
                 case MainMenuOptionsEnum.Quit:
-                    {
+                    
                         Console.WriteLine("Exiting the app...");
                         Environment.Exit(0);
                         break;
-                    }
             }
         }
     }
