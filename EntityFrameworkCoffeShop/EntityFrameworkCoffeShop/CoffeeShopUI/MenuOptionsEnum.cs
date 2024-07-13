@@ -19,7 +19,7 @@ public enum ProductOptionsEnum
 
 public enum CategoryOptionsEnum
 {
-    AddCategory = 1,
+    AddCategory = 700,
     RemoveCategory,
     UpdateCategory,
     ShowAllCategories,

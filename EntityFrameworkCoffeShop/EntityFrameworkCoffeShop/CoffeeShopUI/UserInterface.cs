@@ -106,45 +106,45 @@ public static class UserInterface
         {
             Console.Clear();
             var option = AnsiConsole.Prompt(
-                new SelectionPrompt<CategoryOptionsEnum>()
-                    .Title("Categories Menu")
+                new SelectionPrompt<ProductOptionsEnum>()
+                    .Title("Products Menu")
                     .AddChoices(
-                        CategoryOptionsEnum.AddCategory,
-                        CategoryOptionsEnum.RemoveCategory,
-                        CategoryOptionsEnum.UpdateCategory,
-                        CategoryOptionsEnum.ShowAllCategories,
-                        CategoryOptionsEnum.ShowCategoryProducts,
-                        CategoryOptionsEnum.GoBack
+                        ProductOptionsEnum.AddProduct,
+                        ProductOptionsEnum.RemoveProduct,
+                        ProductOptionsEnum.UpdateProduct,
+                        ProductOptionsEnum.ShowProduct,
+                        ProductOptionsEnum.ShowAllProducts,
+                        ProductOptionsEnum.GoBack
                     ));
 
             switch (option)
             {
-                case CategoryOptionsEnum.AddCategory:
+                case ProductOptionsEnum.AddProduct:
                 {
-                    CategoryService.AddCategoryService();
+                    ProductService.AddProductService();
                     break;
                 }
-                case CategoryOptionsEnum.RemoveCategory:
+                case ProductOptionsEnum.RemoveProduct:
                 {
-                    CategoryService.RemoveCategoryService();
+                    ProductService.RemoveProductService();
                     break;
                 }
-                case CategoryOptionsEnum.UpdateCategory:
+                case ProductOptionsEnum.UpdateProduct:
                 {
-                    CategoryService.UpdateCategoryService();
+                    ProductService.UpdateProductService();
                     break;
                 }
-                case CategoryOptionsEnum.ShowAllCategories:
+                case ProductOptionsEnum.ShowProduct:
                 {
-                    CategoryService.ShowAllCategories();
+                    ProductService.ShowProduct();
                     break;
                 }
-                case CategoryOptionsEnum.ShowCategoryProducts:
+                case ProductOptionsEnum.ShowAllProducts:
                 {
-                    CategoryService.ShowCategoryProductsService();
+                    ProductService.ShowAllProducts();
                     break;
                 }
-                case CategoryOptionsEnum.GoBack:
+                case ProductOptionsEnum.GoBack:
                 {
                     isProductsMenuRunning = false;
                     break;
