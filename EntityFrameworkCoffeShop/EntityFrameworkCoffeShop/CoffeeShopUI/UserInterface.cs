@@ -20,6 +20,7 @@ public static class UserInterface
                     .AddChoices(
                         MainMenuOptionsEnum.ManageCategories,
                         MainMenuOptionsEnum.ManageProducts,
+                        MainMenuOptionsEnum.ManageOrders,
                         MainMenuOptionsEnum.Quit
                     ));
 
@@ -33,6 +34,11 @@ public static class UserInterface
                 case MainMenuOptionsEnum.ManageProducts:
                     {
                         ProductsMenu();
+                        break;
+                    }
+                case MainMenuOptionsEnum.ManageOrders:
+                    {
+                        OrdersMenu();
                         break;
                     }
                 case MainMenuOptionsEnum.Quit:
@@ -146,6 +152,36 @@ public static class UserInterface
                 case ProductOptionsEnum.GoBack:
                 {
                     isProductsMenuRunning = false;
+                    break;
+                }
+            }
+        }
+    }
+
+    private static void OrdersMenu()
+    {
+        var isOrdersMenuRunning = true;
+        while (isOrdersMenuRunning)
+        {
+            Console.Clear();
+            var option = AnsiConsole.Prompt(
+                new SelectionPrompt<OrderOptionsEnum>()
+                    .Title("Products Menu")
+                    .AddChoices(
+                        OrderOptionsEnum.AddOrder,
+                        OrderOptionsEnum.GoBack
+                    ));
+
+            switch (option)
+            {
+                case OrderOptionsEnum.AddOrder:
+                {
+                    OrderService.AddOrder();
+                    break;
+                }
+                case OrderOptionsEnum.GoBack:
+                {
+                    isOrdersMenuRunning = false;
                     break;
                 }
             }

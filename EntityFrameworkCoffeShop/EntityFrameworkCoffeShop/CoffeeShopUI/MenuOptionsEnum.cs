@@ -4,6 +4,7 @@ public enum MainMenuOptionsEnum
 {
     ManageCategories = 500,
     ManageProducts,
+    ManageOrders,
     Quit
 }
 
@@ -24,5 +25,11 @@ public enum CategoryOptionsEnum
     UpdateCategory,
     ShowAllCategories,
     ShowCategoryProducts,
+    GoBack
+}
+
+public enum OrderOptionsEnum
+{
+    AddOrder,
     GoBack
 }

@@ -54,7 +54,7 @@ public class ProductService
     private static List<Product> GetAllProducts()
         => new ProductsContext().Products.Include(x => x.Category).ToList();
 
-    private static Product GetProductOptionInput()
+    public static Product GetProductOptionInput()
     {
         var products = GetAllProducts();
         var productsNameArray = products.Select(x => x.Name).ToArray();
