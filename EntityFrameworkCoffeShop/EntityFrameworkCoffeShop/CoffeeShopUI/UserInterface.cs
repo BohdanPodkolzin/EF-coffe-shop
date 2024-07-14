@@ -1,4 +1,5 @@
 ﻿using System.Globalization;
+using EntityFrameworkCoffeeShop.Migrations.DataTransferObjects;
 using EntityFrameworkCoffeeShop.Models;
 using EntityFrameworkCoffeeShop.Services;
 using Spectre.Console;
@@ -169,6 +170,7 @@ public static class UserInterface
                     .Title("Products Menu")
                     .AddChoices(
                         OrderOptionsEnum.AddOrder,
+                        OrderOptionsEnum.ShowOrders,
                         OrderOptionsEnum.ShowOrder,
                         OrderOptionsEnum.GoBack
                     ));
@@ -180,9 +182,14 @@ public static class UserInterface
                     OrderService.AddOrderService();
                     break;
                 }
-                case OrderOptionsEnum.ShowOrder:
+                case OrderOptionsEnum.ShowOrders:
                 {
                     OrderService.ShowOrderService();
+                    break;
+                }
+                case OrderOptionsEnum.ShowOrder:
+                {
+                    OrderService.ShowProductOrderService();
                     break;
                 }
                 case OrderOptionsEnum.GoBack:
@@ -299,5 +306,49 @@ public static class UserInterface
         Console.WriteLine("Press any key to Return to Menu");
         Console.ReadLine();
     }
-}
 
+    public static void ShowOrder(Order order)
+    {
+        var panel = new Panel($"""
+                               Id: {order.OrderId}
+                               Date: {order.CreatedDate}
+                               Count: {order.OrderProducts.Sum(x => x.Quantity)}
+                               """)
+        {
+            Header = new PanelHeader($"Order №{order.OrderId}"),
+            Padding = new Padding(2, 2, 2, 2),
+        };
+
+        AnsiConsole.Write(panel);
+    }
+
+    public static void ShowProductOrderDetails(List<ProductOrderViewDto> products)
+    {
+        var table = new Table();
+        table.AddColumn("Id");
+        table.AddColumn("Name");
+        table.AddColumn("Category");
+        table.AddColumn("Price");
+        table.AddColumn("Quantity");
+        table.AddColumn("Total Price");
+
+        foreach (var product in products)
+        {
+            if (product.Category is null || product.Name is null) return;
+            table.AddRow(
+                product.Id.ToString(),
+                product.Name,
+                product.Category,
+                product.Quantity.ToString(),
+                product.Price.ToString(CultureInfo.CurrentCulture),
+                product.TotalPrice.ToString(CultureInfo.CurrentCulture)
+            );
+        }
+
+        AnsiConsole.Write(table);
+
+        Console.WriteLine("Press any key to return to Menu");
+        Console.ReadLine();
+        Console.Clear();
+    }
+}

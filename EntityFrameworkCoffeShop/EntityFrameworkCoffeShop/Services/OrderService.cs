@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using EntityFrameworkCoffeeShop.CoffeeShopUI;
 using EntityFrameworkCoffeeShop.Controllers;
+using EntityFrameworkCoffeeShop.Migrations.DataTransferObjects;
 using EntityFrameworkCoffeeShop.Models;
 using Spectre.Console;
 
@@ -13,7 +14,13 @@ public class OrderService
 {
     public static void AddOrderService() 
         => OrderController.AddOrder(GetProductsFromOrder());
-    
+
+    public static void ShowOrderService()
+        => UserInterface.ShowOrderTable(OrderController.GetOrderProducts());
+
+    public static void ShowProductOrderService()
+        => ShowOrderDetails(GetOrderOptionInput());
+
     private static List<OrderProduct> GetProductsFromOrder()
     {
         var products = new List<OrderProduct>();
@@ -46,7 +53,41 @@ public class OrderService
         return products;
     }
 
-    public static void ShowOrderService()
-        => UserInterface.ShowOrderTable(OrderController.GetOrderProducts());
+    private static void ShowOrderDetails(Order order)
+    {
+        if (order.OrderProducts is null) return;
+        var products = order.OrderProducts
+            .Select(x => new ProductOrderViewDto()
+            {
+                Id = x.ProductId,
+                Name = x.Product?.Name,
+                Category = x.Product?.Category?.Name,
+                Quantity = x.Quantity,
+                Price = x.Product.Price,
+                TotalPrice = x.Quantity * x.Product.Price
+            })
+            .ToList();
+
+        UserInterface.ShowOrder(order);
+        UserInterface.ShowProductOrderDetails(products);
+    }
+
+    private static Order GetOrderOptionInput()
+    {
+        var orders = OrderController.GetOrderProducts();
+        var ordersNameArray = orders
+            .Select(x => $"{x.OrderId}. {x.CreatedDate} – {x.TotalPrice}");
+        
+        var option = AnsiConsole.Prompt(new SelectionPrompt<string>()
+            .Title("Choose Order")
+            .AddChoices(ordersNameArray));
+        
+        var idArray = option.Split('.');
+        var order = orders.Single(
+                x => x.OrderId == int.Parse(idArray[0])
+                );
+
+        return order;
+    }
 }
 
