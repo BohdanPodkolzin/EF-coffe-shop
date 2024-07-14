@@ -169,6 +169,7 @@ public static class UserInterface
                     .Title("Products Menu")
                     .AddChoices(
                         OrderOptionsEnum.AddOrder,
+                        OrderOptionsEnum.ShowOrder,
                         OrderOptionsEnum.GoBack
                     ));
 
@@ -177,6 +178,11 @@ public static class UserInterface
                 case OrderOptionsEnum.AddOrder:
                 {
                     OrderService.AddOrderService();
+                    break;
+                }
+                case OrderOptionsEnum.ShowOrder:
+                {
+                    OrderService.ShowOrderService();
                     break;
                 }
                 case OrderOptionsEnum.GoBack:
@@ -266,6 +272,32 @@ public static class UserInterface
 
         AnsiConsole.Write(panel);
         ShowProductsTable(category.Products!);
+    }
+
+    public static void ShowOrderTable(List<Order> orders)
+    {
+        var table = new Table();
+        table.AddColumn("Id");
+        table.AddColumn("Date");
+        table.AddColumn("Count");
+        table.AddColumn("Total Price");
+
+        foreach (var order in orders)
+        {
+
+            table.AddRow(
+                order.OrderId.ToString(),
+                order.CreatedDate.ToString(CultureInfo.CurrentCulture),
+                order.OrderProducts?
+                    .Sum(x => x.Quantity).ToString() ?? string.Empty,
+                order.TotalPrice.ToString(CultureInfo.CurrentCulture)
+                );
+        }
+
+        AnsiConsole.Write(table);
+
+        Console.WriteLine("Press any key to Return to Menu");
+        Console.ReadLine();
     }
 }
 

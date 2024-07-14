@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using EntityFrameworkCoffeeShop.CoffeeShopUI;
 using EntityFrameworkCoffeeShop.Controllers;
 using EntityFrameworkCoffeeShop.Models;
 using Spectre.Console;
@@ -44,5 +45,8 @@ public class OrderService
 
         return products;
     }
+
+    public static void ShowOrderService()
+        => UserInterface.ShowOrderTable(OrderController.GetOrderProducts());
 }
 

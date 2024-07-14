@@ -31,5 +31,6 @@ public enum CategoryOptionsEnum
 public enum OrderOptionsEnum
 {
     AddOrder,
+    ShowOrder,
     GoBack
 }
