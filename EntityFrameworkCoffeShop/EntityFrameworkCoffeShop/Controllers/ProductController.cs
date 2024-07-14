@@ -1,4 +1,5 @@
-﻿using EntityFrameworkCoffeeShop.Models;
+﻿using EntityFrameworkCoffeeShop.Contexts;
+using EntityFrameworkCoffeeShop.Models;
 
 namespace EntityFrameworkCoffeeShop.Controllers;
 
