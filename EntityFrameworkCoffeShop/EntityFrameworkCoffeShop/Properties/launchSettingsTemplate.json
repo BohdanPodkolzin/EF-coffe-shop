@@ -1,0 +1,8 @@
+{
+  "profiles": {
+    "EntityFrameworkCoffeShop": {
+      "commandName": "Project",
+      "workingDirectory": "PATH_TO_DIRECTORY"
+    }
+  }
+}

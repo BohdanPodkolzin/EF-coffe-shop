@@ -482,3 +482,4 @@ $RECYCLE.BIN/
 
 # Vim temporary swap files
 *.swp
+/EntityFrameworkCoffeShop/EntityFrameworkCoffeShop/Properties/launchSettings.json
