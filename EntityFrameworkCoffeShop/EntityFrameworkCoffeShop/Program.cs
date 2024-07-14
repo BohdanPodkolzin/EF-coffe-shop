@@ -11,7 +11,6 @@ public class Program
         context.Database.EnsureDeleted();
         context.Database.EnsureCreated();
 
-
         UserInterface.MainMenu();
     }
 }

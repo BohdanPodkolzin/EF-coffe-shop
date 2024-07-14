@@ -1,5 +1,6 @@
 ﻿using EntityFrameworkCoffeeShop.Models;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Logging;
 
 namespace EntityFrameworkCoffeeShop.Contexts;
 
@@ -11,7 +12,23 @@ public class ProductsContext : DbContext
     public DbSet<OrderProduct> OrderProducts { get; set; }
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-        => optionsBuilder.UseSqlite("Data Source = products.db");
+        => optionsBuilder
+            .UseSqlite("Data Source = products.db")
+            .EnableSensitiveDataLogging()
+            .UseLoggerFactory(GetLoggerFactory());
+
+    private ILoggerFactory? GetLoggerFactory()
+    {
+        var loggerFactory = LoggerFactory.Create(builder =>
+        {
+            builder.AddConsole();
+            builder.AddFilter((category, level) =>
+                category == DbLoggerCategory.Database.Command.Name 
+                           && level == LogLevel.Information);
+        });
+
+        return loggerFactory;
+    }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
