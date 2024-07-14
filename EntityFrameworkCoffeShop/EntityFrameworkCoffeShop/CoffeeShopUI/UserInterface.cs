@@ -22,6 +22,7 @@ public static class UserInterface
                         MainMenuOptionsEnum.ManageCategories,
                         MainMenuOptionsEnum.ManageProducts,
                         MainMenuOptionsEnum.ManageOrders,
+                        MainMenuOptionsEnum.GenerateReport,
                         MainMenuOptionsEnum.Quit
                     ));
 
@@ -42,11 +43,18 @@ public static class UserInterface
                         OrdersMenu();
                         break;
                     }
-                case MainMenuOptionsEnum.Quit:
-                    
-                        Console.WriteLine("Exiting the app...");
-                        Environment.Exit(0);
+                case MainMenuOptionsEnum.GenerateReport:
+                    {
+                        ReportService.ShowReportService();
                         break;
+                    }   
+
+                case MainMenuOptionsEnum.Quit:
+                {
+                    Console.WriteLine("Exiting the app...");
+                    Environment.Exit(0);
+                    break;
+                }
             }
         }
     }
@@ -126,35 +134,35 @@ public static class UserInterface
             switch (option)
             {
                 case ProductOptionsEnum.AddProduct:
-                {
-                    ProductService.AddProductService();
-                    break;
-                }
+                    {
+                        ProductService.AddProductService();
+                        break;
+                    }
                 case ProductOptionsEnum.RemoveProduct:
-                {
-                    ProductService.RemoveProductService();
-                    break;
-                }
+                    {
+                        ProductService.RemoveProductService();
+                        break;
+                    }
                 case ProductOptionsEnum.UpdateProduct:
-                {
-                    ProductService.UpdateProductService();
-                    break;
-                }
+                    {
+                        ProductService.UpdateProductService();
+                        break;
+                    }
                 case ProductOptionsEnum.ShowProduct:
-                {
-                    ProductService.ShowProduct();
-                    break;
-                }
+                    {
+                        ProductService.ShowProduct();
+                        break;
+                    }
                 case ProductOptionsEnum.ShowAllProducts:
-                {
-                    ProductService.ShowAllProducts();
-                    break;
-                }
+                    {
+                        ProductService.ShowAllProducts();
+                        break;
+                    }
                 case ProductOptionsEnum.GoBack:
-                {
-                    isProductsMenuRunning = false;
-                    break;
-                }
+                    {
+                        isProductsMenuRunning = false;
+                        break;
+                    }
             }
         }
     }
@@ -214,9 +222,9 @@ public static class UserInterface
             
             table.AddRow(
                 product.ProductId.ToString(),
-                product.Name,
+                product.Name!,
                 product.Price.ToString(CultureInfo.CurrentCulture),
-                product.Category!.Name
+                product.Category!.Name!
                 );
         }
 
@@ -255,7 +263,7 @@ public static class UserInterface
         {
             table.AddRow(
                 category.CategoryId.ToString(),
-                category.Name
+                category.Name!
             );
         }
 
@@ -312,7 +320,7 @@ public static class UserInterface
         var panel = new Panel($"""
                                Id: {order.OrderId}
                                Date: {order.CreatedDate}
-                               Count: {order.OrderProducts.Sum(x => x.Quantity)}
+                               Count: {order.OrderProducts!.Sum(x => x.Quantity)}
                                """)
         {
             Header = new PanelHeader($"Order №{order.OrderId}"),
@@ -328,8 +336,8 @@ public static class UserInterface
         table.AddColumn("Id");
         table.AddColumn("Name");
         table.AddColumn("Category");
-        table.AddColumn("Price");
         table.AddColumn("Quantity");
+        table.AddColumn("Price");
         table.AddColumn("Total Price");
 
         foreach (var product in products)
@@ -350,5 +358,30 @@ public static class UserInterface
         Console.WriteLine("Press any key to return to Menu");
         Console.ReadLine();
         Console.Clear();
+    }
+
+    public static void ShowReport(List<MonthlyReportDto> report)
+    {
+        var table = new Table();
+        table.AddColumn("Month");
+        table.AddColumn("Price");
+        table.AddColumn("Amount");
+
+        foreach (var monthReport in report)
+        {
+            table.AddRow(
+                monthReport.Month,
+                monthReport.TotalPrice.ToString(CultureInfo.CurrentCulture),
+                monthReport.TotalQuantity.ToString()
+                );
+        }
+
+        AnsiConsole.Write(table);
+
+        Console.WriteLine("Press any key to return to Menu");
+        Console.ReadLine();
+        Console.Clear();
+
+
     }
 }

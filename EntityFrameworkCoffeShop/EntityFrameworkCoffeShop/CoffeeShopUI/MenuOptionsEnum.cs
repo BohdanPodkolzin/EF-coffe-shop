@@ -5,6 +5,7 @@ public enum MainMenuOptionsEnum
     ManageCategories = 500,
     ManageProducts,
     ManageOrders,
+    GenerateReport,
     Quit
 }
 

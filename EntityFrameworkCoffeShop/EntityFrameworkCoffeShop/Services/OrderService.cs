@@ -55,15 +55,14 @@ public class OrderService
 
     private static void ShowOrderDetails(Order order)
     {
-        if (order.OrderProducts is null) return;
-        var products = order.OrderProducts
+        var products = order.OrderProducts!
             .Select(x => new ProductOrderViewDto()
             {
                 Id = x.ProductId,
                 Name = x.Product?.Name,
                 Category = x.Product?.Category?.Name,
                 Quantity = x.Quantity,
-                Price = x.Product.Price,
+                Price = x.Product!.Price,
                 TotalPrice = x.Quantity * x.Product.Price
             })
             .ToList();

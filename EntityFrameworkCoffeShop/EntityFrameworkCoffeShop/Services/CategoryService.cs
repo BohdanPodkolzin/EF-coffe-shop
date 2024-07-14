@@ -1,10 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Globalization;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using EntityFrameworkCoffeeShop.CoffeeShopUI;
+﻿using EntityFrameworkCoffeeShop.CoffeeShopUI;
+using EntityFrameworkCoffeeShop.Contexts;
 using EntityFrameworkCoffeeShop.Controllers;
 using EntityFrameworkCoffeeShop.Models;
 using Microsoft.EntityFrameworkCore;
@@ -53,7 +48,6 @@ namespace EntityFrameworkCoffeeShop.Services
             var option = AnsiConsole.Prompt(new SelectionPrompt<string>()
                 .Title("Choose category")!
                 .AddChoices(categoriesNameArray));
-
 
             var category = categories.Single(x => x.Name == option);
             return category;
