@@ -214,9 +214,9 @@ public static class UserInterface
             
             table.AddRow(
                 product.ProductId.ToString(),
-                product.Name,
+                product.Name!,
                 product.Price.ToString(CultureInfo.CurrentCulture),
-                product.Category!.Name
+                product.Category!.Name!
                 );
         }
 
@@ -255,7 +255,7 @@ public static class UserInterface
         {
             table.AddRow(
                 category.CategoryId.ToString(),
-                category.Name
+                category.Name!
             );
         }
 
@@ -312,7 +312,7 @@ public static class UserInterface
         var panel = new Panel($"""
                                Id: {order.OrderId}
                                Date: {order.CreatedDate}
-                               Count: {order.OrderProducts.Sum(x => x.Quantity)}
+                               Count: {order.OrderProducts!.Sum(x => x.Quantity)}
                                """)
         {
             Header = new PanelHeader($"Order №{order.OrderId}"),
@@ -328,8 +328,8 @@ public static class UserInterface
         table.AddColumn("Id");
         table.AddColumn("Name");
         table.AddColumn("Category");
-        table.AddColumn("Price");
         table.AddColumn("Quantity");
+        table.AddColumn("Price");
         table.AddColumn("Total Price");
 
         foreach (var product in products)
